@@ -12,7 +12,17 @@ const gpa = util.gpa;
 const data = @embedFile("../data/day01.txt");
 
 pub fn main() !void {
-
+    var lines = tokenize(data, "\n");
+    var last: i32 = 0;
+    var count: i32 = 0;
+    while (lines.next()) |line| {
+        var m = (try parseInt(i32, line, 10));
+        if (m > last) {
+            count = count + 1;
+        }
+        last = m;
+    }
+    print("{d}", .{count-1}); // minus one since the first line of input doesn't count
 }
 
 // Useful stdlib functions
